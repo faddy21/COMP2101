@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# Ensure you are in the repository directory
-cd /comp2101/bash || exit
 
 # Git commands to add, commit, and push changes
 git add .

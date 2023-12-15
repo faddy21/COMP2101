@@ -1,0 +1,26 @@
+- name: apache2 play - install apache on target1
+  hosts: target1
+  become: true
+  remote_user: remoteadmin
+  tasks:
+    - name: install apache2 and ufw
+      apt:
+        name:
+          - apache2
+          - ufw
+        state: present
+        update_cache: yes
+
+    - name: enable ufw and allow ssh
+      ufw:
+        state: enabled
+        rule: allow
+        port: ssh
+        proto: tcp
+    - name: allow http
+      ufw:
+        state: enabled
+        rule: allow
+        port: 80
+        proto: tcp
+

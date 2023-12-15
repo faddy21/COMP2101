@@ -1,0 +1,27 @@
+- name: mysql play - install MySQL on target2
+  hosts: target2
+  become: true
+  remote_user: remoteadmin
+  tasks:
+    - name: install mysql-server and ufw
+      apt:
+        name:
+          - mysql-server
+          - ufw
+        state: present
+        update_cache: yes
+
+    - name: enable ufw and allow ssh & mysql (port 3306)
+      ufw:
+        state: enabled
+        rule: allow
+        port: ssh
+        proto: tcp
+
+    - name: allow mysql on port 3306
+      ufw:
+        state: enabled
+        rule: allow
+        port: 3306
+        proto: tcp
+
